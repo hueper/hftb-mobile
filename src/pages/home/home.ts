@@ -24,7 +24,7 @@ export class HomePage {
   private baseUrl: string;
 
   constructor(public navCtrl: NavController, private imageService: ImageService) {
-    this.baseUrl = 'http://192.168.1.14:8100/';
+    this.baseUrl = 'http://hftb.eu/';
   }
 
   ngOnInit() {

@@ -23,7 +23,7 @@ export class ImageService {
   };
 
   constructor(private http: Http) {
-    this.baseUrl = 'http://192.168.1.14:3333/api';
+    this.baseUrl = 'http://hftb.eu:3334/api';
     this.dataStore = { images: [] };
     this._images = <BehaviorSubject<Image[]>>new BehaviorSubject([]);
     this.images = this._images.asObservable();
