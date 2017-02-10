@@ -29,6 +29,7 @@ export class UploadPage {
     location: '',
     date: ''
   };
+  private baseUrl: string;
 
   constructor(
     public http: Http,
@@ -39,7 +40,9 @@ export class UploadPage {
     public toastCtrl: ToastController,
     public platform: Platform,
     public authservice: AuthService,
-    public loadingCtrl: LoadingController) {}
+    public loadingCtrl: LoadingController) {
+      this.baseUrl = 'http://192.168.0.11:3333/api';
+    }
 
   showAddressModal () {
     let modal = this.modalCtrl.create(AutocompletePage);
@@ -62,7 +65,7 @@ export class UploadPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return new Promise(resolve => {
-      this.http.post('http://192.168.0.11:3333/api/image/saveImageMetaData', metaData, { headers: headers }).subscribe(data => {
+      this.http.post(`${this.baseUrl}/images/saveImageMetaData`, metaData, { headers: headers }).subscribe(data => {
         if (data.json().success) {
           this.presentToast(data);
           this.navCtrl.push(HomePage);
@@ -76,9 +79,6 @@ export class UploadPage {
   }
 
   public uploadImage(imageMetaData) {
-    // Destination URL
-    var url = 'http://192.168.0.11:3333/api/upload';
-
     // File for Upload
     var targetPath = this.pathForImage(this.lastImage);
 
@@ -103,7 +103,7 @@ export class UploadPage {
     this.authservice.getinfo().then((data: any) => {
       if (data.success) {
         // Use the FileTransfer to upload the image
-        fileTransfer.upload(targetPath, url, options).then(data => {
+        fileTransfer.upload(targetPath, `${this.baseUrl}/upload`, options).then(data => {
           this.loading.dismissAll()
           this.presentToast(data.response);
           var fileMetaData = JSON.parse(data.response).file;

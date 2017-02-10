@@ -21,8 +21,10 @@ export class HomePage {
   images: Observable<Image[]>;
   singleImage$: Observable<Image>;
   items: string[];
+  private baseUrl: string;
 
   constructor(public navCtrl: NavController, private imageService: ImageService) {
+    this.baseUrl = 'http://192.168.0.11:3333/';
   }
 
   ngOnInit() {

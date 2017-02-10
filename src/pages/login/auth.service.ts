@@ -6,11 +6,13 @@ export class AuthService {
 
   isLoggedin: boolean;
   AuthToken;
+  private baseUrl: string;
 
   constructor(public http: Http) {
     this.http = http;
     this.isLoggedin = false;
     this.AuthToken = null;
+    this.baseUrl = 'http://192.168.0.11:3333/api';
   }
 
   storeUserCredentials(token) {
@@ -41,7 +43,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return new Promise(resolve => {
-      this.http.post('http://192.168.0.11:3333/authenticate', creds, { headers: headers }).subscribe(data => {
+      this.http.post(`${this.baseUrl}/authenticate`, creds, { headers: headers }).subscribe(data => {
         if (data.json().success) {
           this.storeUserCredentials(data.json().token);
           resolve(true);
@@ -57,7 +59,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return new Promise(resolve => {
-      this.http.post('http://localhost:3333/adduser', creds, { headers: headers }).subscribe(data => {
+      this.http.post(`${this.baseUrl}/adduser`, creds, { headers: headers }).subscribe(data => {
         if (data.json().success) {
           resolve(true);
         } else {
@@ -72,7 +74,7 @@ export class AuthService {
       var headers = new Headers();
       this.loadUserCredentials();
       headers.append('Authorization', 'Bearer ' + this.AuthToken);
-      this.http.get('http://192.168.0.11:3333/getinfo', { headers: headers }).subscribe(data => {
+      this.http.get(`${this.baseUrl}/getinfo`, { headers: headers }).subscribe(data => {
         if (data.json().success) {
           resolve(data.json());
         } else {
