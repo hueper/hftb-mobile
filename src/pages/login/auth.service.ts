@@ -12,7 +12,7 @@ export class AuthService {
     this.http = http;
     this.isLoggedin = false;
     this.AuthToken = null;
-    this.baseUrl = 'http://192.168.0.11:3333/api';
+    this.baseUrl = 'http://192.168.1.14:3333/api';
   }
 
   storeUserCredentials(token) {

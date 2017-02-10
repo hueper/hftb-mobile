@@ -41,7 +41,7 @@ export class UploadPage {
     public platform: Platform,
     public authservice: AuthService,
     public loadingCtrl: LoadingController) {
-      this.baseUrl = 'http://192.168.0.11:3333/api';
+      this.baseUrl = 'http://192.168.1.14:3333/api';
     }
 
   showAddressModal () {
