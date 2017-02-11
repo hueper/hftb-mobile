@@ -35,7 +35,7 @@ export class EditPage {
     this.http.get(`${this.baseUrl}/images/removeAllImages`)
     .map(response => response.json())
     .subscribe(data => {
-      this.presentToast(data);
+      this.presentToast(data.msg);
       this.navCtrl.push(UploadPage);
     }, error => console.log('Could not remove all images.'));
   }
