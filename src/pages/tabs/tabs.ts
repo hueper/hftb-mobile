@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
+import { EditPage } from '../edit/edit';
 import { UploadPage } from '../upload/upload';
 
 
@@ -11,7 +12,8 @@ export class TabsPage {
   // should be each tab's root Page
   //tab1Root: any = HomePage;
   tab1Root: any = UploadPage;
-  tab2Root: any = HomePage;
+  tab2Root: any = EditPage;
+  tab3Root: any = HomePage;
 
   constructor() {
 
