@@ -7,6 +7,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { UserPage } from '../pages/user/user';
 import { UploadPage } from '../pages/upload/upload';
 import { TabsPage } from '../pages/tabs/tabs';
+import { EditPage } from '../pages/edit/edit';
 import { AuthService } from '../pages/login/auth.service';
 import { ImageService } from '../pages/home/image.service';
 import { AutocompletePage } from '../pages/autocomplete/autocomplete';
@@ -21,6 +22,7 @@ import { AutocompletePage } from '../pages/autocomplete/autocomplete';
     UserPage,
     UploadPage,
     TabsPage,
+    EditPage,
     AutocompletePage
   ],
   imports: [
@@ -40,6 +42,7 @@ import { AutocompletePage } from '../pages/autocomplete/autocomplete';
     UserPage,
     UploadPage,
     TabsPage,
+    EditPage,
     AutocompletePage
   ],
   providers: [
