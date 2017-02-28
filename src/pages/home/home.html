@@ -1,6 +1,6 @@
 <ion-content padding style="text-align:center;">
   <div *ngFor="let image of images | async" class="imgSpacer">
-    <img width="640px" height="auto" src="{{ baseUrl }}uploads/{{ image.filename }}"/>
+    <img width="640px" height="auto" src="{{ baseUrl }}/uploads/{{ image.filename }}"/>
     <div class="desc-spacer">
       <div class="desc">
         <a target="__blank" href="https://www.google.com/maps/?q={{ image.location }}">

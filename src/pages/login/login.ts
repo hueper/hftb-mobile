@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../providers/auth.service';
 import { UploadPage } from '../upload/upload';
 import { SignupPage } from '../signup/signup';
 

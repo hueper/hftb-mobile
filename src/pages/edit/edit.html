@@ -14,9 +14,28 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let image of images | async; let index = index">
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="{{ baseUrl }}/uploads/{{ image.filename }}"/>
+        </ion-avatar>
+        <h2>{{ image.location }}</h2>
+        <p>{{ image.date }}</p>
+      </ion-item>
+      <ion-item-options (ionSwipe)="navToEdit(image, index); slidingItem.close()">
+        <button (click)="navToEdit(image, index); slidingItem.close()">Edit</button>
+        <button danger (click)="removeImage(image, index)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+<!--
     <ion-buttons>
       <button ion-button icon-left (click)="removeAllImages()">
         <ion-icon name="edit"></ion-icon>Remove all images
       </button>
     </ion-buttons>
+-->
 </ion-content>

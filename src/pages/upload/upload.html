@@ -3,12 +3,12 @@
   <ion-list [hidden]="lastImage === null">
     <ion-item>
       <ion-label floating>Location</ion-label>
-      <!--<ion-input [(ngModel)]="imageMetaData.location" type="text"></ion-input>-->
       <ion-input tappable (click)="showAddressModal()" [(ngModel)]="imageMetaData.location" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Date</ion-label>
-      <ion-input [(ngModel)]="imageMetaData.date" type="text"></ion-input>
+      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="imageMetaData.date"></ion-datetime>
+      <!--<ion-input [(ngModel)]="imageMetaData.date" type="text"></ion-input>-->
     </ion-item>
   </ion-list>
   <h3 [hidden]="lastImage !== null">Please Select Image!</h3>

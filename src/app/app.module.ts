@@ -8,8 +8,9 @@ import { UserPage } from '../pages/user/user';
 import { UploadPage } from '../pages/upload/upload';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EditPage } from '../pages/edit/edit';
-import { AuthService } from '../pages/login/auth.service';
-import { ImageService } from '../pages/home/image.service';
+import { ImageEditPage } from '../pages/image-edit/image-edit';
+import { AuthService } from '../providers/auth.service';
+import { ImageService } from '../providers/image.service';
 import { AutocompletePage } from '../pages/autocomplete/autocomplete';
 
 
@@ -23,6 +24,7 @@ import { AutocompletePage } from '../pages/autocomplete/autocomplete';
     UploadPage,
     TabsPage,
     EditPage,
+    ImageEditPage,
     AutocompletePage
   ],
   imports: [
@@ -43,6 +45,7 @@ import { AutocompletePage } from '../pages/autocomplete/autocomplete';
     UploadPage,
     TabsPage,
     EditPage,
+    ImageEditPage,
     AutocompletePage
   ],
   providers: [

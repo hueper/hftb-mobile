@@ -2,16 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
+import { Image } from '../image';
+import { ENV } from '../environments/environment.dev';
 
-export interface Image {
-  _id: number | string;
-  createdAt: number;
-  filename: string;
-  size: string;
-  location: string;
-  date: string;
-}
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ImageService {
@@ -22,30 +16,15 @@ export class ImageService {
     images: Image[]
   };
 
-  constructor(private http: Http) {
-    this.baseUrl = 'http://hftb.eu:3334/api';
+  constructor(
+    private http: Http
+  ) {
+    this.baseUrl = ENV.API_URL;
     this.dataStore = { images: [] };
     this._images = <BehaviorSubject<Image[]>>new BehaviorSubject([]);
     this.images = this._images.asObservable();
   }
-/*
-  getData(sortBy, order, id): any[] {
-    let data = [];
-    for (var i = 0; i < 20; i++) {
-      data.push(this._getNextImages(sortBy, order, id));
-    }
-    return data;
-  }
 
-  private _getNextImages(sortBy: string, order: string, id: number | string) {
-    this.http.get(`${this.baseUrl}/images/${sortBy}/${order}/${id}`)
-    .map(response => response.json())
-    .subscribe(data => {
-      this.dataStore.images.push(data);
-      this._images.next(Object.assign({}, this.dataStore).images);
-    }, error => console.log('Could not load more images'));
-  }
-*/
   loadAll() {
     this.http.get(`${this.baseUrl}/images`)
     .map(response => response.json())
@@ -110,13 +89,18 @@ export class ImageService {
       }, error => console.log('Could not update image.'));
   }
 
-  remove(imageId: number) {
-    this.http.delete(`${this.baseUrl}/images/${imageId}`).subscribe(response => {
+  remove(image: Image) {
+    return this.http.delete(`${this.baseUrl}/images/${image._id}`)
+    .subscribe(response => {
       this.dataStore.images.forEach((t, i) => {
-        if (t._id === imageId) { this.dataStore.images.splice(i, 1); }
+        if (t._id === image._id) { this.dataStore.images.splice(i, 1); }
       });
-
       this._images.next(Object.assign({}, this.dataStore).images);
     }, error => console.log('Could not delete image.'));
+  }
+
+  removeAllImages() {
+    return this.http.get(`${this.baseUrl}/images/removeAllImages`)
+    .map(response => response.json());
   }
 }

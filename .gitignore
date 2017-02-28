@@ -59,4 +59,4 @@ typings/
 
 # ionic platforms
 platforms
-
+src/environments

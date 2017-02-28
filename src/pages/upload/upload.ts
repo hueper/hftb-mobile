@@ -13,8 +13,9 @@ import { Http, Headers } from '@angular/http';
 import { Camera, File, Transfer, FilePath } from 'ionic-native';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
-import { AuthService } from '../login/auth.service';
+import { AuthService } from '../../providers/auth.service';
 import { AutocompletePage } from '../autocomplete/autocomplete';
+import { ENV } from '../../environments/environment.dev';
 
 declare var cordova: any;
 
@@ -39,9 +40,9 @@ export class UploadPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController,
     public platform: Platform,
-    public authservice: AuthService,
+    public authService: AuthService,
     public loadingCtrl: LoadingController) {
-      this.baseUrl = 'http://hftb.eu:3334/api';
+      this.baseUrl = ENV.API_URL;
     }
 
   showAddressModal () {
@@ -100,7 +101,7 @@ export class UploadPage {
     });
     this.loading.present();
 
-    this.authservice.getinfo().then((data: any) => {
+    this.authService.getinfo().then((data: any) => {
       if (data.success) {
         // Use the FileTransfer to upload the image
         fileTransfer.upload(targetPath, `${this.baseUrl}/upload`, options).then(data => {
@@ -111,6 +112,7 @@ export class UploadPage {
           console.log(imageMetaData);
           this.saveImageMetaData(imageMetaData);
         }, err => {
+          console.log(err);
           this.loading.dismissAll()
           this.presentToast(err.body);
         });
